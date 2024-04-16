@@ -2,9 +2,18 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Demo from "./demo";
 import PublicRoute from "./PublicRoute";
+import PublicLayout from "@/components/PublicComponents/PublicLayout";
+import Home from "./home";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
+        {
+            index: true,
+            path: "home",
+            component: <Home />,
+            exact: true,
+            restrict: true,
+        },
         {
             index: true,
             path: "demo",
@@ -18,15 +27,17 @@ const RouterComponent: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Navigate to="home" />} />
                 <Route path="/" element={<PublicRoute />}>
-                    <Route>
-                        {publicRoute.map((route) => (
-                            <Route
-                                index={route.index}
-                                key={route.path}
-                                path={route.path}
-                                element={route.component}
-                            />
-                        ))}
+                    <Route element={<PublicLayout />}>
+                        <Route>
+                            {publicRoute.map((route) => (
+                                <Route
+                                    index={route.index}
+                                    key={route.path}
+                                    path={route.path}
+                                    element={route.component}
+                                />
+                            ))}
+                        </Route>
                     </Route>
                 </Route>
                 {/* <Route element={<EmployeeRoute />}>
