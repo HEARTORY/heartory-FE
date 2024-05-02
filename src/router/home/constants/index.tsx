@@ -1,4 +1,4 @@
-import Sound from "@/assets/images/diet1.png";
+import Exer from "@/assets/images/diet1.png";
 import Stats from "@/assets/images/stats-21.png";
 import AIdoc from "@/assets/images/chatbot1.png";
 import Medical from "@/assets/images/medical.png";
@@ -10,7 +10,7 @@ export const areaInfo = [
         alt: "heartbeat",
         name: "Heartbeat Measuring",
         description:
-            "We calculate your Heartbeat index from data like age, height, weight.",
+            "We measure your Heartbeat index using PPG mobile camera.",
     },
     {
         link: "doctor",
@@ -18,20 +18,20 @@ export const areaInfo = [
         alt: "AI Doctor Chat",
         name: "AI Doctor Chat",
         description:
-            "Solve your queries by interacting with our bot. Take advice from the doctor.",
+            "Solve your queries by interacting with our bot. Take advice from Mia.",
     },
     {
-        link: "sound",
-        src: Sound,
-        alt: "Healing sound recommendation",
-        name: "Healing sound recommendation",
-        description: "We provide food recomendation according to your calorie requirements.",
+        link: "stats",
+        src: Stats,
+        alt: "Diagnostics",
+        name: "Diagnostics",
+        description: "We provide diagnostics according to your statistics.",
     },
     {
         link: "exercises",
-        src: Stats,
+        src: Exer,
         alt: "Tailored Exercises",
         name: "Tailored Exercises",
-        description: "Get all the nutritional values of your preferred exercises.",
+        description: "Get all the suggestions about your preferred exercises.",
     },
 ];

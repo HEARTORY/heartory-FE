@@ -8,7 +8,7 @@ const Introduction: React.FC = () => {
     <div className="flex flex-row items-center justify-between">
       <div className="flex flex-col gap-10">
         <div className="flex flex-row">
-          <div className="font-bold text-[#38419D] text-6xl">
+          <div className="font-bold text-[#38419D] text-5xl my-10">
             A solution for your <span className="text-[#EF5DA8]">heart</span> needs.
           </div>
           <div><img src={Stars} alt="" /></div>
@@ -16,7 +16,7 @@ const Introduction: React.FC = () => {
         <div className="text-[#8A8585] text-2xl font-bold">
           Using your heart rate, we calculate whether the exercise is suitable for you.
         </div>
-        <div>
+        <div className="mb-10">
           <Input
             placeholder="Search the features"
             className="max-w-lg rounded-full h-[75px] text-xl p-10 font-medium text-[#8A8585]"

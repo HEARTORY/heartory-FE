@@ -4,6 +4,7 @@ import Demo from "./demo";
 import PublicRoute from "./PublicRoute";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import Home from "./home";
+import Login from "./login";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -11,6 +12,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "home",
             component: <Home />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },

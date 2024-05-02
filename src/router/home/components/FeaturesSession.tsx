@@ -12,8 +12,8 @@ const FeaturesSession: React.FC = () => {
       <div className="font-bold text-[#EF5DA8] text-4xl mb-10">FEATURES WE PROVIDE</div>
       <div className="flex flex-wrap justify-between">
         {areaInfo.map((area) => (
-          <div className="w-[47%] mb-14">
-            <div className="flex flex-row gap-5 mb-3">
+          <div className="max-w-[47%] mb-14">
+            <div className="flex flex-wrap gap-5 mb-3">
               <img
                 className="w-[100px] h-[100px]"
                 src={area.src}
