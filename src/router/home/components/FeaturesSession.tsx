@@ -6,12 +6,12 @@ import {
   // , userInfo
   // , quoNum 
 } from "../constants";
-import { slideInFromBottom, slideInFromTop } from "@/utils/motion/motion";
+import { slideInFromBottom,  slideInFromTop } from "@/utils/motion/motion";
 
 const FeaturesSession: React.FC = () => {
   const [ref, inView] = useInView({
     triggerOnce: true, // Only trigger once
-    threshold: 0.3, // Trigger animation when 50% of the element is in view
+    threshold: 0.5, // Trigger animation when 50% of the element is in view
   });
   return (
     <div>
@@ -24,6 +24,7 @@ const FeaturesSession: React.FC = () => {
           ref={ref}
           className="max-w-[47%] mb-14">
             <motion.div 
+            initial="hidden"
             animate={inView ? "visible" : "hidden"}
             variants={slideInFromTop(0.3)}
             className="flex flex-wrap gap-5 mb-3">
@@ -39,6 +40,7 @@ const FeaturesSession: React.FC = () => {
               </div>
             </motion.div >
             <motion.span
+            initial="hidden"
             animate={inView ? "visible" : "hidden"}
             variants={slideInFromBottom(0.6)}
             className="text-[#8A8585] text-2xl font-bold">
