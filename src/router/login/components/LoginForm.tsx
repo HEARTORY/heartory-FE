@@ -69,11 +69,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         try {
             const res = await loginApi.login(values.email, values.password);
             if (res.status === 200) {
-                if (res.data.data) {
-                    localStorage.setItem(
-                        "Token",
-                        res.data.data.accessToken
-                    );
+                if (res.data.data && res.data.data.user.role.roleTitle == "admin") {
+                    localStorage.setItem("Token", res.data.data.accessToken);
                     dispatch(actions.setToken(res.data.data.accessToken));
                     toast({
                         variant: "success",
@@ -81,36 +78,36 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                         description: "Login Successfully",
                     });
                     dispatch(actions.setUser(res.data.data.user));
-                    const role: string = res.data.data.user.role.roleTitle;
-                    // console.log(res.data.data.accessToken, role);
 
-                    if (role == "admin") {
-                        navigate("/home");
-                    } else {
-                        navigate("/home");
-                    }
-                } else {
+                    navigate("/home");
+
+                } else if (res.data.data && res.data.data.user.role.roleTitle != "admin") {
                     toast({
                         variant: "destructive",
-                        title: res.data.messages[0].content,
-                        description: "Please Try again",
+                        title: "You are NOT Admin!",
+                        description: "Please Try Again",
+                    });
+                }
+                else {
+                    toast({
+                        variant: "destructive",
+                        title: res.data.message,
+                        description: "Please Try Again!",
                     });
                 }
             } else {
-                for (const mess of res.data.messages) {
-                    toast({
-                        variant: "destructive",
-                        title: mess.content,
-                        description: "Please Try again",
-                    });
-                }
+                toast({
+                    variant: "destructive",
+                    title: res.data.message,
+                    description: "Please Try Again!",
+                });
             }
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
             toast({
                 variant: "destructive",
-                title: "Login Error",
-                description: "Please Try again",
+                title: error.response.data.message,
+                description: "Please Try Again!",
             });
         }
     }

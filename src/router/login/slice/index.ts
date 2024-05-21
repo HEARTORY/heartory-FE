@@ -4,9 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   token: "",
-  user: {
-    email: "",
-  },
+  user: {},
 };
 
 export const name = "user";
@@ -20,8 +18,7 @@ const slice = createSlice({
       state.token = action.payload as string;
     },
     setUser: (state: any, action: any) => {
-      const { email } = action.payload;
-      state.user.email = email;
+      state.user = action.payload;
     },
     setEmail: (state: any, action: any) => {
       state.user.email = action.payload as string;
