@@ -15,20 +15,19 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import { loginApi } from "@/utils/api/loginApi";
+import { loginApi } from "@/utils/api/loginApi";
 import { toast } from "@/components/ui/Toast/use-toast";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { devEnvGoogleAuth } from "../constants";
-// import { actions } from "../slice";
-// import { useDispatch } from "react-redux";
-// import { actions } from "../slice";
+import { useDispatch } from "react-redux";
+import { actions } from "../slice";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const [userName, setUserName] = React.useState("");
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleGoogleLogin = () => {
         // window.location.replace(devEnvGoogleAuth());
     };
@@ -40,7 +39,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             .string()
             .min(8, {
                 message:
-                    "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+                    "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one special character",
             })
             .regex(/[A-Z]/, {
                 message: "Password must contain at least one uppercase letter.",
@@ -48,9 +47,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             .regex(/[a-z]/, {
                 message: "Password must contain at least one lowercase letter.",
             })
-            .regex(/[0-9]/, {
-                message: "Password must contain at least one number.",
-            })
+            // .regex(/[0-9]/, {
+            //     message: "Password must contain at least one number.",
+            // })
             .regex(/[!@#$%^&*(),.?":{}|<>]/, {
                 message:
                     "Password must contain at least one special character.",
@@ -65,52 +64,50 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         },
     });
     async function onSubmit(
-        // values: z.infer<typeof formSchema>
+        values: z.infer<typeof formSchema>
     ) {
         try {
-            // const res = await loginApi.login(values.email, values.password);
-            // if (res.status === 200) {
-            //     if (res.data.data) {
-            //         localStorage.setItem(
-            //             "Token",
-            //             res.data.data.token.token.accessToken
-            //         );
-            //         toast({
-            //             variant: "success",
-            //             title: "Login Successfully",
-            //             description: "Login Successfully",
-            //         });
-            //         dispatch(actions.setUser(res.data.data.userInfo));
-            //         const roles: string[] = res.data.data.token.roles;
-            //         if (roles.includes("Admin")) {
-            //             navigate("/admin");
-            //         } else if (roles.includes("Staff")) {
-            //             navigate("/staff");
-            //         } else {
-            //             navigate("/home");
-            //         }
-            //     } else {
-            //         toast({
-            //             variant: "destructive",
-            //             title: res.data.messages[0].content,
-            //             description: "Please Try again",
-            //         });
-            //     }
-            // } else {
-            //     for (const mess of res.data.messages) {
-            //         toast({
-            //             variant: "destructive",
-            //             title: mess.content,
-            //             description: "Please Try again",
-            //         });
-            //     }
-            // }
-        } catch (error) {
+            const res = await loginApi.login(values.email, values.password);
+            if (res.status === 200) {
+                if (res.data.data && res.data.data.user.role.roleTitle == "admin") {
+                    localStorage.setItem("Token", res.data.data.accessToken);
+                    dispatch(actions.setToken(res.data.data.accessToken));
+                    toast({
+                        variant: "success",
+                        title: "Login Successfully",
+                        description: "Login Successfully",
+                    });
+                    dispatch(actions.setUser(res.data.data.user));
+
+                    navigate("/home");
+
+                } else if (res.data.data && res.data.data.user.role.roleTitle != "admin") {
+                    toast({
+                        variant: "destructive",
+                        title: "You are NOT Admin!",
+                        description: "Please Try Again",
+                    });
+                }
+                else {
+                    toast({
+                        variant: "destructive",
+                        title: res.data.message,
+                        description: "Please Try Again!",
+                    });
+                }
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: res.data.message,
+                    description: "Please Try Again!",
+                });
+            }
+        } catch (error: any) {
             console.log(error);
             toast({
                 variant: "destructive",
-                title: "Login Error",
-                description: "Please Try again",
+                title: error.response.data.message,
+                description: "Please Try Again!",
             });
         }
     }
