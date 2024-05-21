@@ -2,7 +2,7 @@
 
 import axios, { AxiosResponse } from "axios";
 
-const defaultURL = "http://3.27.194.223:8080/api";
+const defaultURL = "http://localhost:8080/api";
 
 interface PublicCallParams {
   method: string;
