@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Mia from "@/assets/images/MASCOTCLEAN-05.png"
 import Stars from "@/assets/images/MASCOTCLEAN-04 - Copy.png"
 import { LoginForm } from "./components/LoginForm";
+import { useNavigate } from "react-router-dom";
 
 interface Props { }
 
 const Login: React.FC<Props> = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("Token");
+
+  useEffect(() => {
+    if (token) {
+      navigate("/home");
+    }
+  });
   return (
     <div className="container">
       <div className="flex flex-wrap justify-around mt-14">
