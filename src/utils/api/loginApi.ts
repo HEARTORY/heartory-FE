@@ -1,11 +1,15 @@
 // import { getGoogleAuthRequest } from "@/router/login/constants";
 import { post } from "./ApiCaller";
 const loginUrl = `/auth/login`;
+const resetUrl = `/auth/reset`;
 // let registerUrl = `/Auth/register`;
 // let GooogleAuth = `/Auth/google-oauth`;
 export const loginApi = {
   login: (email: string, password: string) => {
     return post(loginUrl, { email, password });
+  },
+  reset: (password: string) => {
+    return post(resetUrl, { password });
   },
   // register: (email: string, password: string) => {
   //     return post(registerUrl, { email, password });
