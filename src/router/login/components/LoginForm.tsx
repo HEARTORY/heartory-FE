@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import Google from "@/assets/images/Google.png";
+// import Google from "@/assets/images/Google.png";
 import {
     Form,
     FormControl,
@@ -28,9 +28,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     const dispatch = useDispatch();
     // const [userName, setUserName] = React.useState("");
     const navigate = useNavigate();
-    const handleGoogleLogin = () => {
-        // window.location.replace(devEnvGoogleAuth());
-    };
+    // const handleGoogleLogin = () => {
+    //     // window.location.replace(devEnvGoogleAuth());
+    // };
     const formSchema = z.object({
         email: z.string().email({
             message: "Invalid email format.",
@@ -166,7 +166,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                     </div>
                 </form>
             </Form>
-            <div className="relative">
+            {/* <div className="relative">
                 <div className="relative flex justify-center text-xs">
                     <span className="px-2 text-muted-foreground">
                         Or continue with
@@ -176,7 +176,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             <Button className="rounded-full p-6" variant="outline" type="button" onClick={handleGoogleLogin}>
                 <img src={Google} width={25} className="mr-3" />
                 Sign in with Google
-            </Button>
+            </Button> */}
         </div>
     );
 }

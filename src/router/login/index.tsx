@@ -27,7 +27,7 @@ const Login: React.FC<Props> = () => {
               <img src={Stars} alt="" className="hidden lg:block lg:absolute lg:bottom-0 lg:right-0" />
             </div>
             <div className="text-[#38419D] text-2xl font-semibold">
-              If you already have an account, you can <span className="text-[#EF5DA8] font-bold">Login Here!</span>
+              If you are Heartory admin, you can <span className="text-[#EF5DA8] font-bold">Login Here!</span>
             </div>
           </div>
           <div className="basis-1/2">
