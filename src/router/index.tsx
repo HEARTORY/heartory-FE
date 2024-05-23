@@ -5,8 +5,18 @@ import PublicRoute from "./PublicRoute";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import Home from "./home";
 import Login from "./login";
+import PasswordReset from "./forgetPassword";
 
 const RouterComponent: React.FC = () => {
+    const hiddenRoute = [
+        {
+            index: true,
+            path: "passwordReset/:resetToken",
+            component: <PasswordReset />,
+            exact: true,
+            restrict: true,
+        },
+    ];
     const publicRoute = [
         {
             index: true,
@@ -48,9 +58,9 @@ const RouterComponent: React.FC = () => {
                         </Route>
                     </Route>
                 </Route>
-                {/* <Route element={<EmployeeRoute />}>
-                    <Route element={<LayoutComponent />}>
-                        {employeeRoute.map((route) => (
+                <Route path="/" element={<PublicRoute />}>
+                    <Route>
+                        {hiddenRoute.map((route) => (
                             <Route
                                 index={route.index}
                                 key={route.path}
@@ -60,18 +70,6 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
-                <Route element={<AdminRoute />}>
-                    <Route element={<LayoutComponent />}>
-                        {adminRoute.map((route) => (
-                            <Route
-                                index={route.index}
-                                key={route.path}
-                                path={route.path}
-                                element={route.component}
-                            />
-                        ))}
-                    </Route>
-                </Route> */}
                 {/* <Route path="/payment/result" element={<Payment />} />
 
                 <Route path="/404" element={<ErrorPage />} />
