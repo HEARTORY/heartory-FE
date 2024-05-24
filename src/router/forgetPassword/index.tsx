@@ -19,9 +19,9 @@ const Login: React.FC<Props> = () => {
       const res = await loginApi.validateReset(resetToken);
       try {
         if (res.status != 200) {
-          navigate("/home");
+          navigate("/resetNotAccepted");
         } else if (res.data.statusCode != 200) {
-          navigate("/home");
+          navigate("/resetNotAccepted");
         } else {
           setLoadingPage(false);
         }
@@ -32,7 +32,7 @@ const Login: React.FC<Props> = () => {
           title: error.response.data.message,
           description: "Please try again!",
         });
-        navigate("/home");
+        navigate("/resetNotAccepted");
       }
     }
   }
