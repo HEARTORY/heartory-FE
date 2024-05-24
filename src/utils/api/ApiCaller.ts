@@ -2,7 +2,7 @@
 
 import axios, { AxiosResponse } from "axios";
 
-const defaultURL = "http://localhost:8080/api";
+const defaultURL = "https://heartory-be.onrender.com/api";
 
 interface PublicCallParams {
   method: string;
