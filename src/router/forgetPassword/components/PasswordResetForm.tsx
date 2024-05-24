@@ -25,27 +25,28 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
     const { resetToken } = useParams();
     const navigate = useNavigate();
-    async function onValidate(resetToken: string) {
-        const res = await loginApi.validateReset(resetToken as string);
-        try {
-            if (res.status != 200) {
-                navigate("/home");
-            } else if (res.data.statusCode != 200) {
+    async function onValidate() {
+        if (resetToken) {
+            const res = await loginApi.validateReset(resetToken);
+            try {
+                if (res.status != 200) {
+                    navigate("/home");
+                } else if (res.data.statusCode != 200) {
+                    navigate("/home");
+                }
+            } catch (error: any) {
+                console.log(error);
+                toast({
+                    variant: "destructive",
+                    title: error.response.data.message,
+                    description: "Please try again!",
+                });
                 navigate("/home");
             }
-        } catch (error: any) {
-            console.log(error);
-            toast({
-                variant: "destructive",
-                title: error.response.data.message,
-                description: "Please try again!",
-            });
-            navigate("/home");
         }
     }
     useEffect(() => {
-        if (resetToken)
-            onValidate(resetToken as string);
+        onValidate();
     }, [resetToken]);
     const formSchema = z.object({
         password: z
