@@ -20,72 +20,74 @@ const items = [
 
 const Footer: React.FC = () => {
     return (
-        <footer className="w-full bg-white">
-            <div className="container mb-20">
-                <div className="flex flex-wrap justify-between py-16 border-b-2 mb-5">
-                    <div className="flex flex-col gap-4">
-                        <div className="w-40 mx-7">
-                            <Link
-                                to={"/"}
-                            >
-                                <img
-                                    className=""
-                                    src={logo15}
-                                    alt={"logo"}
-                                />
-                            </Link>
-                        </div>
-                        <div className="flex flex-row justify-center">
-                            <div className="text-[#38419D] mx-2">
-                                <FaFacebook />
+        <footer className="w-full bg-white flex justify-center">
+            <div className="w-full max-w-[85%]">
+                <div className="container mb-20">
+                    <div className="flex flex-wrap justify-between py-16 border-b-2 mb-5">
+                        <div className="flex flex-col gap-4">
+                            <div className="w-40 mx-7">
+                                <Link
+                                    to={"/"}
+                                >
+                                    <img
+                                        className=""
+                                        src={logo15}
+                                        alt={"logo"}
+                                    />
+                                </Link>
                             </div>
-                            <div className="text-[#38419D] mx-2">
-                                <FaInstagram />
+                            <div className="flex flex-row justify-center">
+                                <div className="text-[#38419D] mx-2">
+                                    <FaFacebook />
+                                </div>
+                                <div className="text-[#38419D] mx-2">
+                                    <FaInstagram />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="font-bold text-[#38419D] text-xl">
-                            Product
+                        <div className="flex flex-col gap-4">
+                            <div className="font-bold text-[#38419D] text-xl">
+                                Product
+                            </div>
+                            <div className="text-[#8A8585]">
+                                <div className="flex flex-col gap-1 text-[#8A8585]">
+                                    Features
+                                </div>
+                            </div>
                         </div>
-                        <div className="text-[#8A8585]">
+                        <div className="flex flex-col gap-4">
+                            <div className="font-bold text-[#38419D] text-xl">
+                                Company
+                            </div>
                             <div className="flex flex-col gap-1 text-[#8A8585]">
-                                Features
+                                <div>
+                                    About
+                                </div>
+                                <div>
+                                    Contact Us
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="font-bold text-[#38419D] text-xl">
-                            Company
-                        </div>
-                        <div className="flex flex-col gap-1 text-[#8A8585]">
-                            <div>
-                                About
-                            </div>
-                            <div>
+                        <div className="flex flex-col gap-4">
+                            <div className="font-bold text-[#38419D] text-xl">
                                 Contact Us
                             </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div className="font-bold text-[#38419D] text-xl">
-                            Contact Us
-                        </div>
-                        <div className="flex flex-col gap-1 text-[#8A8585]">
-                            {items.map((item: any, idx: number) => (
-                                <div key={idx} className="flex gap-1">
-                                    <div className="text-blue-400 my-auto">
-                                        <item.icon classname=""></item.icon>
+                            <div className="flex flex-col gap-1 text-[#8A8585]">
+                                {items.map((item: any, idx: number) => (
+                                    <div key={idx} className="flex gap-1">
+                                        <div className="text-blue-400 my-auto">
+                                            <item.icon classname=""></item.icon>
+                                        </div>
+                                        <div className="my-auto">{item.text}</div>
                                     </div>
-                                    <div className="my-auto">{item.text}</div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-wrap justify-between text-[#8A8585]">
-                    <div>Copyright © 2024</div>
-                    <div>All Rights Reserved | Terms and Conditions | Privacy Policy</div>
+                    <div className="flex flex-wrap justify-between text-[#8A8585]">
+                        <div>Copyright © 2024</div>
+                        <div>All Rights Reserved | Terms and Conditions | Privacy Policy</div>
+                    </div>
                 </div>
             </div>
         </footer>

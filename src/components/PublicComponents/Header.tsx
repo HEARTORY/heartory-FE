@@ -26,7 +26,7 @@ const Header: React.FC = () => {
     };
 
     return (
-        <header className="w-full py-5">
+        <header className="w-full py-5 max-w-[85%]">
             <div className="container flex justify-between text-[#38419D] text-xl">
                 <div className="w-52">
                     <Link
@@ -56,7 +56,7 @@ const Header: React.FC = () => {
                         ))}
                     </div>
                 </div>
-                <div className="my-auto flex flex-row justify-end">
+                <div className="my-auto flex flex-row justify-end min-w-40">
                     {token && token != "" ? (
                         <div
                             className="hover:underline font-medium my-auto text-lg mr-5"
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
                             to={"/login"}
                         >
                             <Button
-                                className="p-5"
+                                className="p-5 hidden"
                                 variant={"blueCustom"}>
                                 Login as Admin
                             </Button>
