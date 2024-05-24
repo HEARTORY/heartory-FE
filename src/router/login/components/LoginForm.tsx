@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
@@ -21,10 +21,12 @@ import { useNavigate } from "react-router-dom";
 // import { devEnvGoogleAuth } from "../constants";
 import { useDispatch } from "react-redux";
 import { actions } from "../slice";
+import Loading from "@/components/PublicComponents/Loading";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
     // const [userName, setUserName] = React.useState("");
     const navigate = useNavigate();
@@ -47,9 +49,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             .regex(/[a-z]/, {
                 message: "Password must contain at least one lowercase letter.",
             })
-            // .regex(/[0-9]/, {
-            //     message: "Password must contain at least one number.",
-            // })
+            .regex(/[0-9]/, {
+                message: "Password must contain at least one number.",
+            })
             .regex(/[!@#$%^&*(),.?":{}|<>]/, {
                 message:
                     "Password must contain at least one special character.",
@@ -67,8 +69,10 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         values: z.infer<typeof formSchema>
     ) {
         try {
+            setLoading(true);
             const res = await loginApi.login(values.email, values.password);
             if (res.status === 200) {
+                setLoading(false);
                 if (res.data.data && res.data.data.user.role.roleTitle == "admin") {
                     localStorage.setItem("Token", res.data.data.accessToken);
                     dispatch(actions.setToken(res.data.data.accessToken));
@@ -85,29 +89,31 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                     toast({
                         variant: "destructive",
                         title: "You are NOT Admin!",
-                        description: "Please Try Again",
+                        description: "Please try again",
                     });
                 }
                 else {
                     toast({
                         variant: "destructive",
                         title: res.data.message,
-                        description: "Please Try Again!",
+                        description: "Please try again!",
                     });
                 }
             } else {
+                setLoading(false);
                 toast({
                     variant: "destructive",
                     title: res.data.message,
-                    description: "Please Try Again!",
+                    description: "Please try again!",
                 });
             }
         } catch (error: any) {
+            setLoading(false);
             console.log(error);
             toast({
                 variant: "destructive",
                 title: error.response.data.message,
-                description: "Please Try Again!",
+                description: "Please try again!",
             });
         }
     }
@@ -156,10 +162,12 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                                         </FormItem>
                                     )}
                                 />
-                                <Button className="mt-5 p-6 text-lg"
+                                <Button className={`mt-5 p-6 text-lg`}
                                     variant={"blueCustom"}
-                                    type="submit">
+                                    type="submit"
+                                    disabled={loading}>
                                     Login
+                                    {loading && <div className="ml-2 h-5 w-5"><Loading></Loading></div>}
                                 </Button>
                             </div>
                         </div>

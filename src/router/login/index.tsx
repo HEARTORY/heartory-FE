@@ -21,7 +21,7 @@ const Login: React.FC<Props> = () => {
         <div className="flex flex-wrap justify-around lg:basis-2/3">
           <div className="flex flex-col gap-4 mb-10 lg:basis-1/2">
             <div className="lg:min-h-44 relative">
-              <div className="font-bold text-[#38419D] text-5xl mb-4 lg:text-6xl lg:mb-0">
+              <div className="font-bold text-[#38419D] text-5xl mb-4 lg:text-[56px] lg:mb-0">
                 Login to get your <span className="text-[#EF5DA8]">Heartory</span>
               </div>
               <img src={Stars} alt="" className="hidden lg:block lg:absolute lg:bottom-0 lg:right-0" />

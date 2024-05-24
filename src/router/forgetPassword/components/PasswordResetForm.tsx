@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
@@ -16,11 +16,38 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toast } from "@/components/ui/Toast/use-toast";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
+    const { resetToken } = useParams();
+    const navigate = useNavigate();
+    async function onValidate() {
+        if (resetToken) {
+            const res = await loginApi.validateReset(resetToken);
+            try {
+                if (res.status != 200) {
+                    navigate("/home");
+                } else if (res.data.statusCode != 200) {
+                    navigate("/home");
+                }
+            } catch (error: any) {
+                console.log(error);
+                toast({
+                    variant: "destructive",
+                    title: error.response.data.message,
+                    description: "Please try again!",
+                });
+                navigate("/home");
+            }
+        }
+    }
+    useEffect(() => {
+        onValidate();
+    }, [resetToken]);
     const formSchema = z.object({
         password: z
             .string()
@@ -53,7 +80,7 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
         values: z.infer<typeof formSchema>
     ) {
         try {
-            const res = await loginApi.reset(values.password);
+            const res = await loginApi.reset(values.password, resetToken as string);
             if (res.status === 200) {
                 if (res.data.data) {
                     toast({
@@ -65,14 +92,14 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
                     toast({
                         variant: "destructive",
                         title: res.data.message,
-                        description: "Please Try Again!",
+                        description: "Please try again!",
                     });
                 }
             } else {
                 toast({
                     variant: "destructive",
                     title: res.data.message,
-                    description: "Please Try Again!",
+                    description: "Please try again!",
                 });
             }
         } catch (error: any) {
@@ -80,7 +107,7 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
             toast({
                 variant: "destructive",
                 title: error.response.data.message,
-                description: "Please Try Again!",
+                description: "Please try again!",
             });
         }
     }
