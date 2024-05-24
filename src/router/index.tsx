@@ -6,6 +6,9 @@ import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import Home from "./home";
 import Login from "./login";
 import PasswordReset from "./forgetPassword";
+import NotFound from "./404";
+import Error403Page from "./403";
+import ErrorTokenPage from "./tokenExpired";
 
 const RouterComponent: React.FC = () => {
     const hiddenRoute = [
@@ -39,6 +42,27 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "/resetNotAccepted",
+            component: <ErrorTokenPage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "403",
+            component: <Error403Page />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "404",
+            component: <NotFound />,
+            exact: true,
+            restrict: true,
+        }
     ];
     return (
         <BrowserRouter>
@@ -70,11 +94,7 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
-                {/* <Route path="/payment/result" element={<Payment />} />
-
-                <Route path="/404" element={<ErrorPage />} />
-                <Route path="/403" element={<Error403Page />} />
-                <Route path="*" element={<ErrorPage />} /> */}
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );

@@ -7,7 +7,7 @@ interface Props { }
 
 const Home: React.FC<Props> = () => {
   return (
-    <div className="container mt-9">
+    <div className="container mt-2">
       <Introduction />
       <FeaturesSession />
     </div>

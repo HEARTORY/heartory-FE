@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
@@ -17,37 +17,15 @@ import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toast } from "@/components/ui/Toast/use-toast";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import Loading from "@/components/PublicComponents/Loading";
 // import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
+    const [loading, setLoading] = useState(false);
     const { resetToken } = useParams();
-    const navigate = useNavigate();
-    async function onValidate() {
-        if (resetToken) {
-            const res = await loginApi.validateReset(resetToken);
-            try {
-                if (res.status != 200) {
-                    navigate("/home");
-                } else if (res.data.statusCode != 200) {
-                    navigate("/home");
-                }
-            } catch (error: any) {
-                console.log(error);
-                toast({
-                    variant: "destructive",
-                    title: error.response.data.message,
-                    description: "Please try again!",
-                });
-                navigate("/home");
-            }
-        }
-    }
-    useEffect(() => {
-        onValidate();
-    }, [resetToken]);
+
     const formSchema = z.object({
         password: z
             .string()
@@ -80,15 +58,18 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
         values: z.infer<typeof formSchema>
     ) {
         try {
+            setLoading(true);
             const res = await loginApi.reset(values.password, resetToken as string);
             if (res.status === 200) {
-                if (res.data.data) {
+                if (res.data.statusCode === 200) {
+                    setLoading(false);
                     toast({
                         variant: "success",
-                        title: "Reset Password Successfully",
+                        title: res.data.message,
                         description: "You can log in Heartory with new password now!",
                     });
                 } else {
+                    setLoading(false);
                     toast({
                         variant: "destructive",
                         title: res.data.message,
@@ -96,6 +77,7 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
                     });
                 }
             } else {
+                setLoading(false);
                 toast({
                     variant: "destructive",
                     title: res.data.message,
@@ -103,6 +85,7 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
                 });
             }
         } catch (error: any) {
+            setLoading(false);
             console.log(error);
             toast({
                 variant: "destructive",
@@ -141,8 +124,10 @@ export function PasswordResetForm({ className, ...props }: UserAuthFormProps) {
                                 />
                                 <Button className="mt-5 p-6 text-lg mb-14"
                                     variant={"blueCustom"}
-                                    type="submit">
+                                    type="submit"
+                                    disabled={loading}>
                                     Submit
+                                    {loading && <div className="ml-2 h-5 w-5"><Loading></Loading></div>}
                                 </Button>
                             </div>
                         </div>
