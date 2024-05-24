@@ -56,7 +56,7 @@ const Header: React.FC = () => {
                         ))}
                     </div>
                 </div>
-                <div className="my-auto flex flex-row justify-end min-w-40">
+                <div className="my-auto flex flex-row justify-end min-w-48">
                     {token && token != "" ? (
                         <div
                             className="hover:underline font-medium my-auto text-lg mr-5"
