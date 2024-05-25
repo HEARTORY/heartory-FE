@@ -23,9 +23,9 @@ const Footer: React.FC = () => {
         <footer className="w-full bg-white flex justify-center mt-10">
             <div className="w-full max-w-[85%]">
                 <div className="container mb-20">
-                    <div className="flex flex-wrap justify-between pt-16 pb-6 border-b-2 mb-5">
+                    <div className="flex flex-wrap justify-center sm:justify-between pt-16 pb-6 border-b-2 mb-5">
                         <div className="flex flex-col gap-4 max-w-56 mb-10">
-                            <div className="w-40 mx-7">
+                            <div className="w-20 sm:w-40 mx-7">
                                 <Link
                                     to={"/"}
                                 >
@@ -47,20 +47,20 @@ const Footer: React.FC = () => {
                         </div>
                         <div className="flex flex-wrap justify-between w-4/6">
                             <div className="flex flex-col gap-4 mb-4 ml-4">
-                                <div className="font-bold text-[#38419D] text-xl">
+                                <div className="font-bold text-[#38419D] text-sm sm:text-xl">
                                     Product
                                 </div>
-                                <div className="text-[#8A8585]">
-                                    <div className="flex flex-col gap-1 text-[#8A8585]">
+                                <div className="flex flex-col gap-1 text-[#8A8585] text-xs sm:text-lg">
+                                    <div>
                                         Features
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4 mb-4 ml-4">
-                                <div className="font-bold text-[#38419D] text-xl">
+                                <div className="font-bold text-[#38419D] text-sm sm:text-xl">
                                     Company
                                 </div>
-                                <div className="flex flex-col gap-1 text-[#8A8585]">
+                                <div className="flex flex-col gap-1 text-[#8A8585] text-xs sm:text-lg">
                                     <div>
                                         About
                                     </div>
@@ -70,10 +70,10 @@ const Footer: React.FC = () => {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4 mb-4 ml-4">
-                                <div className="font-bold text-[#38419D] text-xl">
+                                <div className="font-bold text-[#38419D] text-sm sm:text-xl">
                                     Contact Us
                                 </div>
-                                <div className="flex flex-col gap-1 text-[#8A8585]">
+                                <div className="flex flex-col gap-1 text-[#8A8585] text-xs sm:text-lg">
                                     {items.map((item: any, idx: number) => (
                                         <div key={idx} className="flex gap-1">
                                             <div className="text-[#38419D] my-auto">
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-wrap justify-between text-[#8A8585]">
+                    <div className="flex flex-wrap justify-between text-[#8A8585] text-xs sm:text-lg">
                         <div>Copyright © 2024</div>
                         <div>All Rights Reserved | Terms and Conditions | Privacy Policy</div>
                     </div>

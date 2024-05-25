@@ -122,7 +122,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="text-[#38419D]">
-                        <div className="font-semibold text-4xl mb-8">
+                        <div className="font-semibold text-center sm:text-left text-xl sm:text-4xl mb-8 sm:mt-0 mt-4">
                             Welcome Back
                         </div>
                         <div className="grid gap-2">

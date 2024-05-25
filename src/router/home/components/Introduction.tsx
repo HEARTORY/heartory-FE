@@ -17,7 +17,7 @@ const Introduction: React.FC = () => {
         <div
 
           className="flex flex-row justify-around lg:justify-between relative">
-          <div className="font-bold text-[#38419D] text-[44px] my-10">
+          <div className="font-bold text-[#38419D] text-lg sm:text-[44px] mt-4 sm:my-10 leading-normal">
             A solution for your <span className="text-[#EF5DA8]">heart</span> needs
           </div>
           <div>
@@ -25,13 +25,13 @@ const Introduction: React.FC = () => {
           </div>
         </div>
         <div
-          className="text-[#8A8585] text-2xl font-bold">
+          className="text-[#8A8585] text-xs sm:text-2xl font-bold">
           Using your heart rate, we calculate whether the exercise is suitable for you.
         </div>
         <div className="mb-10">
           <Input
             placeholder="Search the features"
-            className="max-w-lg rounded-full h-[75px] text-xl p-10 font-medium text-[#8A8585]"
+            className="max-w-lg rounded-full sm:h-[75px] text-[10px] sm:text-xl p-4 sm:p-10 font-medium text-[#8A8585]"
           />
         </div>
       </motion.div>
