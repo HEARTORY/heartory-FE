@@ -9,6 +9,9 @@ import PasswordReset from "./forgetPassword";
 import NotFound from "./404";
 import Error403Page from "./403";
 import ErrorTokenPage from "./tokenExpired";
+import AdminRoute from "./AdminRoute";
+import Dashboard from "./dashboard";
+import AdminLayout from "@/components/AdminComponents/AdminLayout";
 
 const RouterComponent: React.FC = () => {
     const hiddenRoute = [
@@ -16,6 +19,15 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "passwordReset/:resetToken",
             component: <PasswordReset />,
+            exact: true,
+            restrict: true,
+        },
+    ];
+    const adminRoute = [
+        {
+            index: true,
+            path: "admin/dashboard",
+            component: <Dashboard />,
             exact: true,
             restrict: true,
         },
@@ -85,6 +97,20 @@ const RouterComponent: React.FC = () => {
                 <Route path="/" element={<PublicRoute />}>
                     <Route>
                         {hiddenRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route>
+                <Route element={<AdminRoute />}>
+                    <Route
+                        element={<AdminLayout />}
+                    >
+                        {adminRoute.map((route) => (
                             <Route
                                 index={route.index}
                                 key={route.path}
