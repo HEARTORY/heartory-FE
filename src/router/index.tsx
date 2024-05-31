@@ -9,6 +9,8 @@ import PasswordReset from "./forgetPassword";
 import NotFound from "./404";
 import Error403Page from "./403";
 import ErrorTokenPage from "./tokenExpired";
+import PaymentCancel from "./paymentCancel";
+import PaymentSuccess from "./paymentSuccess";
 
 const RouterComponent: React.FC = () => {
     const hiddenRoute = [
@@ -46,6 +48,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "/resetNotAccepted",
             component: <ErrorTokenPage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "/payment/success",
+            component: <PaymentSuccess />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "/payment/cancel",
+            component: <PaymentCancel />,
             exact: true,
             restrict: true,
         },
