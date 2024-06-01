@@ -16,6 +16,7 @@ import YearSelect from "./components/YearSelect";
 // import { getSubscriptionsPaging } from "./usecase/getSubscriptionsPaging";
 import { MdOutlineRequestQuote } from "react-icons/md";
 import { BsChatQuote } from "react-icons/bs";
+import { dashboardApi } from "@/utils/api/dashboardApi";
 
 interface Props {
     // define your props here
@@ -31,8 +32,28 @@ const Dashboard: React.FC<Props> = () => {
     const [, setTotalItems] = useState(2);
     const [pageSize,] = useState(5);
     const [pageIndex,] = useState(1);
-
     // const [data, setData] = useState(null);
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        const currentDate = new Date();
+        const dateIn2019 = new Date(currentDate);
+        dateIn2019.setFullYear(2019);
+
+        const startDate = dateIn2019.toISOString();
+        const endDate = new Date().toISOString();
+        try {
+            const token = `Bearer ${localStorage.getItem("Token")}`;
+            const res = await dashboardApi.getDashboard(token, startDate, endDate, );
+            if(res){
+                console.log(res);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const transformedData = [
         {
             name: "Jan",
