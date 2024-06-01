@@ -4,12 +4,12 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import {
     Card,
     CardContent,
-    CardDescription,
+    // CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/Card";
 import { Overview } from "./components/overview";
-import { RecentSales } from "./components/recent-sales";
+// import { RecentSales } from "./components/recent-sales";
 // import { dashboardApi } from "@/utils/api/dashboardApi";
 import Loading from "@/components/PublicComponents/Loading";
 import YearSelect from "./components/YearSelect";
@@ -22,85 +22,24 @@ interface Props {
     // define your props here
 }
 const Dashboard: React.FC<Props> = () => {
-    const [subscriptions, setSubscriptions] = useState<any[]>([]);
-    // const [loading, setLoading] = useState(true);
-    const [searchField,] = useState("status");
-    const [searchValue,] = useState("signed");
-    const [sortField,] = useState("signedAt");
-    const [descending,] = useState(true);
-    const [, setTotalPages] = useState(2);
-    const [, setTotalItems] = useState(2);
-    const [pageSize,] = useState(5);
-    const [pageIndex,] = useState(1);
+    // const [subscriptions, setSubscriptions] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+    // const [searchField,] = useState("status");
+    // const [searchValue,] = useState("signed");
+    // const [sortField,] = useState("signedAt");
+    // const [descending,] = useState(true);
+    // const [, setTotalPages] = useState(2);
+    // const [, setTotalItems] = useState(2);
+    // const [pageSize,] = useState(5);
+    // const [pageIndex,] = useState(1);
     // const [data, setData] = useState(null);
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        const currentDate = new Date();
-        const dateIn2019 = new Date(currentDate);
-        dateIn2019.setFullYear(2019);
-
-        const startDate = dateIn2019.toISOString();
-        const endDate = new Date().toISOString();
-        try {
-            const token = `Bearer ${localStorage.getItem("Token")}`;
-            const res = await dashboardApi.getDashboard(token, startDate, endDate, );
-            if(res){
-                console.log(res);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
     const transformedData = [
-        {
-            name: "Jan",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Feb",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Mar",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Apr",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
         {
             name: "May",
             total: Math.floor(Math.random() * 5000) + 1000,
         },
         {
-            name: "Jun",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Jul",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Aug",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Sep",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Oct",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Nov",
-            total: Math.floor(Math.random() * 5000) + 1000,
-        },
-        {
-            name: "Dec",
+            name: "June",
             total: Math.floor(Math.random() * 5000) + 1000,
         },
     ];
@@ -115,59 +54,38 @@ const Dashboard: React.FC<Props> = () => {
     const [transaction, setTransaction] = useState(100);
     const [subscription, setSubscription] = useState(100);
     const [selectedYear, setSelectedYear] = useState("2024");
-    async function getSubscriptionsService(
-        searchField: string,
-        searchValue: string,
-        sortField: string,
-        descending: boolean,
-        pageSize: number,
-        pageIndex: number
-    ) {
-        // const res = await getSubscriptionsPaging(
-        //     searchField,
-        //     searchValue,
-        //     sortField,
-        //     descending,
-        //     pageSize,
-        //     pageIndex
-        // );
-        // if (res) {
-        //     // setLoading(false);
-        //     setSubscriptions(res.subscriptionsItems);
-        //     setTotalPages(res.lastPage);
-        //     setTotalItems(res.total);
-        // }
-        // console.log(res?.subscriptionsItems);
-
-    }
     useEffect(() => {
         const fetchData = async () => {
             // setData(null);
-            // const token = `Bearer ${localStorage.getItem("Token")}`;
-            // const res = await dashboardApi.getDashboard(
-            //     token as string,
-            //     selectedYear
-            // );
-            // setSelectedYear(selectedYear);
-            // // setNewUser(res.data.data.newUsersCount);
-            // setTotalRevenue(res.data.data.totalRevenue);
-            // setData(res.data.data.revenueByMonths);
-            // setSubscription(res.data.data.subscriptionsCount);
-            // setTransaction(res.data.data.transactionsCount);
+            const token = `Bearer ${localStorage.getItem("Token")}`;
+            const res = await dashboardApi.getDashboard(
+                token as string
+                // ,selectedYear
+            );
+            if (res.status != 200) {
+                setLoading(true);
+            } else if (res.data.statusCode != 200) {
+                setLoading(true);
+            } else {
+                setSelectedYear(selectedYear);
+                // setNewUser(res.data.data.newUsersCount);
+                setTotalRevenue(res.data.data.totalRevenue);
+                // setData(res.data.data.revenueByDay);
+                setSubscription(res.data.data.freeUserCount);
+                setTransaction(res.data.data.premiumUserCount);
+                setLoading(false);
+            }
         };
-        // fetchData();
-        getSubscriptionsService(
-            searchField,
-            searchValue,
-            sortField,
-            descending,
-            pageSize,
-            pageIndex
-        );
+        fetchData();
     }, [selectedYear]);
     return (
         <>
-            <div className="hidden flex-col md:flex">
+
+            {loading ? <div className="w-full h-screen flex justify-center items-center">
+                <div className="w-32 h-32">
+                    <Loading></Loading>
+                </div>
+            </div> : <div className="hidden flex-col md:flex">
                 {/* <div className="border-b">
                     <div className="flex h-16 items-center px-4">
                         <div className="ml-auto flex items-center space-x-4">
@@ -222,7 +140,7 @@ const Dashboard: React.FC<Props> = () => {
                                 <Card className="border">
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-sm font-medium">
-                                            Total Transaction
+                                            Free Users
                                         </CardTitle>
                                         {/* <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -243,17 +161,17 @@ const Dashboard: React.FC<Props> = () => {
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-2xl font-bold">
-                                            +{transaction}
+                                            {transaction}
                                         </div>
                                         <p className="text-xs text-muted-foreground">
-                                            The Total transaction of {selectedYear}
+                                            {/* The Total transaction of {selectedYear} */}
                                         </p>
                                     </CardContent>
                                 </Card>
                                 <Card className="border">
                                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                         <CardTitle className="text-sm font-medium">
-                                            Total Subscription
+                                            Premium Users
                                         </CardTitle>
                                         {/* <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -274,10 +192,10 @@ const Dashboard: React.FC<Props> = () => {
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-2xl font-bold">
-                                            +{subscription}
+                                            {subscription}
                                         </div>
                                         <p className="text-xs text-muted-foreground">
-                                            The Total subscription signed in {selectedYear}
+                                            {/* The Total subscription signed in {selectedYear} */}
                                         </p>
                                     </CardContent>
                                 </Card>
@@ -291,7 +209,7 @@ const Dashboard: React.FC<Props> = () => {
                                         <Overview data={data} />
                                     </CardContent>
                                 </Card>
-                                <Card className="col-span-3 border">
+                                {/* <Card className="col-span-3 border">
                                     <CardHeader>
                                         <CardTitle>Recent Subscriptions</CardTitle>
                                         <CardDescription>
@@ -301,14 +219,13 @@ const Dashboard: React.FC<Props> = () => {
                                     <CardContent>
                                         <RecentSales subscriptions={subscriptions} />
                                     </CardContent>
-                                </Card>
+                                </Card> */}
                             </div>
                         </TabsContent>
                     </Tabs>
                     {/* )} */}
                 </div>
-            </div>
-            {/* {!data && <Loading />} */}
+            </div>}
         </>
     );
 };

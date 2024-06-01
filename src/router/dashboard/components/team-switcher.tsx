@@ -12,7 +12,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/Popover";
 import { Dialog, DialogContent } from "@radix-ui/react-dialog";
-import { Button } from "@/components/ui/Button/Button";
+import { Button } from "@/components/ui/Button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import {
     Command,
@@ -71,7 +71,7 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<
     typeof PopoverTrigger
 >;
 
-interface TeamSwitcherProps extends PopoverTriggerProps {}
+interface TeamSwitcherProps extends PopoverTriggerProps { }
 
 export default function TeamSwitcher({ className }: TeamSwitcherProps) {
     const [open, setOpen] = React.useState(false);

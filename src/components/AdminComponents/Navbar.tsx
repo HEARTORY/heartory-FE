@@ -1,9 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 
 import {
-    FileTextIcon,
-    PersonIcon,
-    IdCardIcon,
+    // FileTextIcon,
+    // PersonIcon,
+    // IdCardIcon,
     DashboardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
