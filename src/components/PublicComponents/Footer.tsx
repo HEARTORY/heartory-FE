@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
         <footer className="w-full bg-white flex justify-center mt-10">
             <div className="w-full max-w-[85%]">
                 <div className="container mb-20">
-                    <div className="flex flex-wrap justify-between pt-16 pb-6 border-b-2 mb-5">
+                    <div className="flex flex-wrap justify-center sm:justify-between pt-16 pb-6 border-b-2 mb-5">
                         <div className="flex flex-col gap-4 max-w-56 mb-10">
                             <div className="w-20 sm:w-40 mx-7">
                                 <Link
