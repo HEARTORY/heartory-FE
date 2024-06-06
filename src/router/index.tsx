@@ -11,6 +11,8 @@ import Error403Page from "./403";
 import ErrorTokenPage from "./tokenExpired";
 import PaymentCancel from "./paymentCancel";
 import PaymentSuccess from "./paymentSuccess";
+import Dashboard from "./dashboard";
+import AdminRoute from "./AdminRoute";
 
 const RouterComponent: React.FC = () => {
     const hiddenRoute = [
@@ -18,6 +20,15 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "passwordReset/:resetToken",
             component: <PasswordReset />,
+            exact: true,
+            restrict: true,
+        },
+    ];
+    const adminRoute = [
+        {
+            index: true,
+            path: "admin/dashboard",
+            component: <Dashboard />,
             exact: true,
             restrict: true,
         },
@@ -96,6 +107,18 @@ const RouterComponent: React.FC = () => {
                                 />
                             ))}
                         </Route>
+                    </Route>
+                </Route>
+                <Route path="/" element={<AdminRoute />}>
+                    <Route>
+                        {adminRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
                     </Route>
                 </Route>
                 <Route path="/" element={<PublicRoute />}>
