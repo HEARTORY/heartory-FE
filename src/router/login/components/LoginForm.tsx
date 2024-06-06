@@ -83,7 +83,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                     });
                     dispatch(actions.setUser(res.data.data.user));
 
-                    navigate("/home");
+                    navigate("/admin/dashboard");
 
                 } else if (res.data.data && res.data.data.user.role.roleTitle != "admin") {
                     toast({
