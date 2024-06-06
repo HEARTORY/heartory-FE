@@ -1,7 +1,7 @@
 import React from "react";
-// import './css/style.css';
-// import './css/satoshi.css';
-// import 'flatpickr/dist/flatpickr.min.css';
+import './css/style.css';
+import './css/satoshi.css';
+import 'flatpickr/dist/flatpickr.min.css';
 import CardDataStats from './components/CardDataStats';
 import ChartOne from './components/Charts/ChartOne';
 import ChartThree from './components/Charts/ChartThree';
