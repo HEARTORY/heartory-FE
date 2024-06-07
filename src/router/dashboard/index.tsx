@@ -12,6 +12,7 @@ import ChartFour from "./components/Charts/ChartFour";
 import DefaultLayout from './layout/DefaultLayout';
 import Loading from "@/components/PublicComponents/Loading";
 import { dashboardApi } from "@/utils/api/dashboardApi";
+import DatePickerOne from "./components/Forms/DatePicker/DatePickerOne";
 
 interface Props {
     // define your props here
@@ -61,6 +62,11 @@ const Dashboard: React.FC<Props> = () => {
                     </div>
                 </div> :
                 <DefaultLayout>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mb-5">
+                        <div></div><div></div>
+                        <DatePickerOne></DatePickerOne>
+                        <DatePickerOne></DatePickerOne>
+                    </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
                         <CardDataStats title="Total Revenue" total={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(totalRevenue)} rate="" levelUp>
                             <svg
@@ -179,7 +185,7 @@ const Dashboard: React.FC<Props> = () => {
                         </div> 
                         <ChatCard />*/}
                     </div>
-                </DefaultLayout>}
+                </DefaultLayout >}
         </>
     );
 };

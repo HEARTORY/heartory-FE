@@ -13,7 +13,7 @@ interface ChartTwoState {
 
 const ChartTwo: React.FC<Props> = (props) => {
   const options: ApexOptions = {
-    colors: ['#38419D', '#EF5DA8'],
+    colors: ['#3C50E0', '#EF5DA8'],
     chart: {
       fontFamily: 'Satoshi, sans-serif',
       type: 'bar',
