@@ -29,6 +29,9 @@ const DatePickerEnd = () => {
 
   return (
     <div>
+      <label className="mb-1 block text-sm font-medium text-[#8A8585] dark:text-white">
+        To
+      </label>
       <div className="relative">
         <input
           className="form-datepicker-end w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
