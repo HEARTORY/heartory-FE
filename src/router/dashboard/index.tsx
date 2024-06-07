@@ -6,8 +6,9 @@ import CardDataStats from './components/CardDataStats';
 import ChartOne from './components/Charts/ChartOne';
 import ChartThree from './components/Charts/ChartThree';
 import ChartTwo from './components/Charts/ChartTwo';
-import ChatCard from './components/Chat/ChatCard';
-import TableOne from './components/Tables/TableOne';
+import ChartFour from "./components/Charts/ChartFour";
+// import ChatCard from './components/Chat/ChatCard';
+// import TableOne from './components/Tables/TableOne';
 import DefaultLayout from './layout/DefaultLayout';
 import Loading from "@/components/PublicComponents/Loading";
 import { dashboardApi } from "@/utils/api/dashboardApi";
@@ -23,6 +24,8 @@ const Dashboard: React.FC<Props> = () => {
     const [totalMonthSubscriptions, setTotalMonthSubscriptions] = useState(0);
     const [freeUserCount, setFreeUserCount] = useState(0);
     const [premiumUserCount, setPremiumUserCount] = useState(0);
+    const [revenueByDay, setRevenueByDay] = useState(null);
+    const [monthlySubscriptionByDay, setMonthlySubscriptionByDay] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,6 +45,8 @@ const Dashboard: React.FC<Props> = () => {
                 setPremiumUserCount(res.data.data.premiumUserCount);
                 setTotalYearSubscriptions(res.data.data.totalYearSubscriptions);
                 setTotalMonthSubscriptions(res.data.data.totalMonthSubscriptions);
+                setRevenueByDay(res.data.data.revenueByDay);
+                setMonthlySubscriptionByDay(res.data.data.monthlySubscriptionByDay);
                 setLoading(false);
             }
         };
@@ -59,7 +64,7 @@ const Dashboard: React.FC<Props> = () => {
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
                         <CardDataStats title="Total Revenue" total={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(totalRevenue)} rate="" levelUp>
                             <svg
-                                className="fill-primary dark:fill-white"
+                                className="fill-[#3C50E0] dark:fill-white"
                                 width="20"
                                 height="22"
                                 viewBox="0 0 20 22"
@@ -82,7 +87,7 @@ const Dashboard: React.FC<Props> = () => {
                         </CardDataStats>
                         <CardDataStats title="Total Users" total={new Intl.NumberFormat().format(freeUserCount + premiumUserCount)} rate="" levelUp>
                             <svg
-                                className="fill-primary dark:fill-white"
+                                className="fill-[#3C50E0] dark:fill-white"
                                 width="22"
                                 height="18"
                                 viewBox="0 0 22 18"
@@ -105,7 +110,7 @@ const Dashboard: React.FC<Props> = () => {
                         </CardDataStats>
                         <CardDataStats title="Total Subscriptions" total={new Intl.NumberFormat().format(totalMonthSubscriptions + totalYearSubscriptions)} rate="" levelUp>
                             <svg
-                                className="fill-primary dark:fill-white"
+                                className="fill-[#3C50E0] dark:fill-white"
                                 width="22"
                                 height="16"
                                 viewBox="0 0 22 16"
@@ -124,7 +129,7 @@ const Dashboard: React.FC<Props> = () => {
                         </CardDataStats>
                         <CardDataStats title="Premium Users" total={new Intl.NumberFormat().format(premiumUserCount)} rate="" levelUp>
                             <svg
-                                className="fill-primary dark:fill-white"
+                                className="fill-[#3C50E0] dark:fill-white"
                                 width="22"
                                 height="18"
                                 viewBox="0 0 22 18"
@@ -145,7 +150,7 @@ const Dashboard: React.FC<Props> = () => {
                                 />
                             </svg>
                             {/* <svg
-                                className="fill-primary dark:fill-white"
+                                className="fill-[#3C50E0] dark:fill-white"
                                 width="22"
                                 height="22"
                                 viewBox="0 0 22 22"
@@ -165,13 +170,14 @@ const Dashboard: React.FC<Props> = () => {
                     </div>
 
                     <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-                        <ChartOne />
-                        <ChartTwo />
-                        <ChartThree />
-                        <div className="col-span-12 xl:col-span-8">
+                        <ChartOne revenueByDay={revenueByDay} />
+                        <ChartTwo monthlySubscriptionByDay={monthlySubscriptionByDay} />
+                        <ChartThree freeUserCount={freeUserCount} premiumUserCount={premiumUserCount} />
+                        <ChartFour totalYearSubscriptions={totalYearSubscriptions} totalMonthSubscriptions={totalMonthSubscriptions} />
+                        {/* <div className="col-span-12 xl:col-span-8">
                             <TableOne />
-                        </div>
-                        <ChatCard />
+                        </div> 
+                        <ChatCard />*/}
                     </div>
                 </DefaultLayout>}
         </>

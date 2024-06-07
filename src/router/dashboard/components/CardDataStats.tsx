@@ -28,13 +28,12 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
           <h4 className="text-title-md font-bold text-black dark:text-white">
             {total}
           </h4>
-          <span className="text-sm font-medium">{title}</span>
+          <span className="text-sm font-medium text-[#8A8585]">{title}</span>
         </div>
 
         <span
-          className={`flex items-center gap-1 text-sm font-medium ${
-            levelUp && 'text-meta-3'
-          } ${levelDown && 'text-meta-5'} `}
+          className={`flex items-center gap-1 text-sm font-medium ${levelUp && 'text-meta-3'
+            } ${levelDown && 'text-meta-5'} `}
         >
           {rate}
 
