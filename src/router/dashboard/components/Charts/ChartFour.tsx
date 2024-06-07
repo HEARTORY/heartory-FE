@@ -3,22 +3,22 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 interface Props {
-  freeUserCount: number,
-  premiumUserCount: number,
+  totalMonthSubscriptions: number,
+  totalYearSubscriptions: number,
 }
 
-interface ChartThreeState {
+interface ChartFourState {
   series: number[];
 }
 
-const ChartThree: React.FC<Props> = (props: any) => {
+const ChartFour: React.FC<Props> = (props: any) => {
   const options: ApexOptions = {
     chart: {
       fontFamily: 'Satoshi, sans-serif',
       type: 'donut',
     },
-    colors: ['#3C50E0', '#0FADCF'],
-    labels: ['Free', 'Premium'],
+    colors: ['#EF5DA8', '#6577F3'],
+    labels: ['Year', 'Month'],
     legend: {
       show: false,
       position: 'bottom',
@@ -54,16 +54,16 @@ const ChartThree: React.FC<Props> = (props: any) => {
       },
     ],
   };
-  const [state, setState] = useState<ChartThreeState>({
+  const [state, setState] = useState<ChartFourState>({
     series:
-      [props.freeUserCount, props.premiumUserCount]
+      [props.totalYearSubscriptions, props.totalMonthSubscriptions]
     ,
   });
 
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [props.freeUserCount, props.premiumUserCount],
+      series: [props.totalYearSubscriptions, props.totalMonthSubscriptions],
     }));
   };
   handleReset;
@@ -73,7 +73,7 @@ const ChartThree: React.FC<Props> = (props: any) => {
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
           <h5 className="text-xl font-semibold text-black dark:text-white">
-            Users
+            Subscriptions
           </h5>
         </div>
         <div>
@@ -115,7 +115,7 @@ const ChartThree: React.FC<Props> = (props: any) => {
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="chartFour" className="mx-auto flex justify-center">
           <ReactApexChart
             options={options}
             series={state.series}
@@ -127,19 +127,19 @@ const ChartThree: React.FC<Props> = (props: any) => {
       <div className="-mx-8 flex flex-wrap items-center justify-center gap-y-3">
         <div className="sm:w-1/3 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#3C50E0]"></span>
+            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6577F3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Free </span>
-              <span> {Math.floor(props.freeUserCount * 100 / (props.freeUserCount + props.premiumUserCount))}% </span>
+              <span> Month </span>
+              <span> {Math.floor(props.totalMonthSubscriptions * 100 / (props.totalMonthSubscriptions + props.totalYearSubscriptions))}% </span>
             </p>
           </div>
         </div>
         <div className="sm:w-1/3 w-full px-8">
           <div className="flex w-full items-center">
-            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#0FADCF]"></span>
+            <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#EF5DA8]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
-              <span> Premium </span>
-              <span> {Math.ceil(props.premiumUserCount * 100 / (props.freeUserCount + props.premiumUserCount))}% </span>
+              <span> Year </span>
+              <span> {Math.ceil(props.totalYearSubscriptions * 100 / (props.totalMonthSubscriptions + props.totalYearSubscriptions))}% </span>
             </p>
           </div>
         </div>
@@ -148,4 +148,4 @@ const ChartThree: React.FC<Props> = (props: any) => {
   );
 };
 
-export default ChartThree;
+export default ChartFour;
