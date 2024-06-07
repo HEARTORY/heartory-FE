@@ -3,8 +3,8 @@ import generateActions from "./generateActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  dateStart: "May 01, 2024",
-  dateEnd: "August 31, 2024",
+  dateStart: "2024-05-01",
+  dateEnd: "2024-08-31",
 };
 
 export const name = "dateRangeDashboard";

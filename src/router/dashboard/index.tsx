@@ -12,13 +12,18 @@ import ChartFour from "./components/Charts/ChartFour";
 import DefaultLayout from './layout/DefaultLayout';
 import Loading from "@/components/PublicComponents/Loading";
 import { dashboardApi } from "@/utils/api/dashboardApi";
-import DatePickerOne from "./components/Forms/DatePicker/DatePickerOne";
+import DatePickerStart from "./components/Forms/DatePicker/DatePickerStart";
+import DatePickerEnd from "./components/Forms/DatePicker/DatePickerEnd";
+import { useSelector } from "react-redux";
+import selector from "@/router/dashboard/slice/selector";
 
 interface Props {
     // define your props here
 }
 
 const Dashboard: React.FC<Props> = () => {
+    const dateStart = useSelector(selector.dateStart);
+    const dateEnd = useSelector(selector.dateEnd);
     const [loading, setLoading] = useState(true);
     const [totalRevenue, setTotalRevenue] = useState(0);
     const [totalYearSubscriptions, setTotalYearSubscriptions] = useState(0);
@@ -30,11 +35,11 @@ const Dashboard: React.FC<Props> = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            // setData(null);
             const token = `Bearer ${localStorage.getItem("Token")}`;
             const res = await dashboardApi.getDashboard(
-                token as string
-                // ,selectedYear
+                token as string,
+                dateStart as string,
+                dateEnd as string
             );
             if (res.status != 200) {
                 setLoading(true);
@@ -52,7 +57,7 @@ const Dashboard: React.FC<Props> = () => {
             }
         };
         fetchData();
-    }, []);
+    }, [dateStart, dateEnd]);
     return (
         <>
             {loading ?
@@ -63,9 +68,8 @@ const Dashboard: React.FC<Props> = () => {
                 </div> :
                 <DefaultLayout>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mb-5">
-                        <div></div><div></div>
-                        <DatePickerOne></DatePickerOne>
-                        <DatePickerOne></DatePickerOne>
+                        <DatePickerStart></DatePickerStart>
+                        <DatePickerEnd></DatePickerEnd>
                     </div>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
                         <CardDataStats title="Total Revenue" total={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(totalRevenue)} rate="" levelUp>
@@ -91,6 +95,25 @@ const Dashboard: React.FC<Props> = () => {
                                 />
                             </svg>
                         </CardDataStats>
+                        <CardDataStats title="Total Subscriptions" total={new Intl.NumberFormat().format(totalMonthSubscriptions + totalYearSubscriptions)} rate="" levelUp>
+                            <svg
+                                className="fill-[#3C50E0] dark:fill-white"
+                                width="22"
+                                height="16"
+                                viewBox="0 0 22 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M11 15.1156C4.19376 15.1156 0.825012 8.61876 0.687512 8.34376C0.584387 8.13751 0.584387 7.86251 0.687512 7.65626C0.825012 7.38126 4.19376 0.918762 11 0.918762C17.8063 0.918762 21.175 7.38126 21.3125 7.65626C21.4156 7.86251 21.4156 8.13751 21.3125 8.34376C21.175 8.61876 17.8063 15.1156 11 15.1156ZM2.26876 8.00001C3.02501 9.27189 5.98126 13.5688 11 13.5688C16.0188 13.5688 18.975 9.27189 19.7313 8.00001C18.975 6.72814 16.0188 2.43126 11 2.43126C5.98126 2.43126 3.02501 6.72814 2.26876 8.00001Z"
+                                    fill=""
+                                />
+                                <path
+                                    d="M11 10.9219C9.38438 10.9219 8.07812 9.61562 8.07812 8C8.07812 6.38438 9.38438 5.07812 11 5.07812C12.6156 5.07812 13.9219 6.38438 13.9219 8C13.9219 9.61562 12.6156 10.9219 11 10.9219ZM11 6.625C10.2437 6.625 9.625 7.24375 9.625 8C9.625 8.75625 10.2437 9.375 11 9.375C11.7563 9.375 12.375 8.75625 12.375 8C12.375 7.24375 11.7563 6.625 11 6.625Z"
+                                    fill=""
+                                />
+                            </svg>
+                        </CardDataStats>
                         <CardDataStats title="Total Users" total={new Intl.NumberFormat().format(freeUserCount + premiumUserCount)} rate="" levelUp>
                             <svg
                                 className="fill-[#3C50E0] dark:fill-white"
@@ -110,25 +133,6 @@ const Dashboard: React.FC<Props> = () => {
                                 />
                                 <path
                                     d="M15.9843 10.0313H15.6749C14.6437 10.0313 13.6468 10.3406 12.7874 10.8563C11.8593 9.61876 10.3812 8.79376 8.73115 8.79376H5.67178C2.85303 8.82814 0.618652 11.0625 0.618652 13.8469V16.3219C0.618652 16.975 1.13428 17.4906 1.7874 17.4906H20.2468C20.8999 17.4906 21.4499 16.9406 21.4499 16.2875V15.4625C21.4155 12.4719 18.9749 10.0313 15.9843 10.0313ZM2.16553 15.9438V13.8469C2.16553 11.9219 3.74678 10.3406 5.67178 10.3406H8.73115C10.6562 10.3406 12.2374 11.9219 12.2374 13.8469V15.9438H2.16553V15.9438ZM19.8687 15.9438H13.7499V13.8469C13.7499 13.2969 13.6468 12.7469 13.4749 12.2313C14.0937 11.7844 14.8499 11.5781 15.6405 11.5781H15.9499C18.0812 11.5781 19.8343 13.3313 19.8343 15.4625V15.9438H19.8687Z"
-                                    fill=""
-                                />
-                            </svg>
-                        </CardDataStats>
-                        <CardDataStats title="Total Subscriptions" total={new Intl.NumberFormat().format(totalMonthSubscriptions + totalYearSubscriptions)} rate="" levelUp>
-                            <svg
-                                className="fill-[#3C50E0] dark:fill-white"
-                                width="22"
-                                height="16"
-                                viewBox="0 0 22 16"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M11 15.1156C4.19376 15.1156 0.825012 8.61876 0.687512 8.34376C0.584387 8.13751 0.584387 7.86251 0.687512 7.65626C0.825012 7.38126 4.19376 0.918762 11 0.918762C17.8063 0.918762 21.175 7.38126 21.3125 7.65626C21.4156 7.86251 21.4156 8.13751 21.3125 8.34376C21.175 8.61876 17.8063 15.1156 11 15.1156ZM2.26876 8.00001C3.02501 9.27189 5.98126 13.5688 11 13.5688C16.0188 13.5688 18.975 9.27189 19.7313 8.00001C18.975 6.72814 16.0188 2.43126 11 2.43126C5.98126 2.43126 3.02501 6.72814 2.26876 8.00001Z"
-                                    fill=""
-                                />
-                                <path
-                                    d="M11 10.9219C9.38438 10.9219 8.07812 9.61562 8.07812 8C8.07812 6.38438 9.38438 5.07812 11 5.07812C12.6156 5.07812 13.9219 6.38438 13.9219 8C13.9219 9.61562 12.6156 10.9219 11 10.9219ZM11 6.625C10.2437 6.625 9.625 7.24375 9.625 8C9.625 8.75625 10.2437 9.375 11 9.375C11.7563 9.375 12.375 8.75625 12.375 8C12.375 7.24375 11.7563 6.625 11 6.625Z"
                                     fill=""
                                 />
                             </svg>
