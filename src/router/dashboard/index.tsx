@@ -35,6 +35,7 @@ const Dashboard: React.FC<Props> = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             const token = `Bearer ${localStorage.getItem("Token")}`;
             const res = await dashboardApi.getDashboard(
                 token as string,
