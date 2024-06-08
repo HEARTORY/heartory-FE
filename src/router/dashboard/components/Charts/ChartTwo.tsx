@@ -81,9 +81,7 @@ const ChartTwo: React.FC<Props> = (props) => {
       },
       {
         name: 'Year Subscriptions',
-        data: props.monthlySubscriptionByDay.map((item: any) => {
-          return item[1];
-        }),
+        data: 1,
       },
       // {
       //   name: 'Revenue',
