@@ -11,30 +11,34 @@ const AppInfo: React.FC = () => {
         threshold: 0.5, // Trigger animation when 50% of the element is in view
     });
     return (
-        <div>
-            <div className="font-bold text-[#EF5DA8] text-3xl sm:text-3xl mb-10 text-center">
-                ABOUT OUR APP
+        <div className="flex flex-col items-center">
+            <div className="font-bold text-[#EF5DA8] text-3xl sm:text-3xl m text-center uppercase">
+                We strive to have everything you need to live longer and happier
             </div>
-
+            <div className="w-[90%] md:w-[50%] m-8 text-gray-500">
+                HEARTORY offers evidence-based mental health program and tools
+                focused on stress and anxiety that are designed to support
+                worldwide health.
+            </div>
             <motion.div
                 initial="hidden"
                 animate="visible"
                 ref={ref}
-                className=" md:flex justify-between "
+                className=" flex justify-between  items-center flex-col md:flex-row"
             >
                 <motion.div
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={slideInFromRight(0.3)}
-                    className=" md:max-w-[48%] mb-14 w-full"
+                    className=" md:max-w-[48%] mb-14 w-full flex justify-center"
                 >
-                    <img src={showcase} />
+                    <img src={showcase} className="md:w-full w-[90%]" />
                 </motion.div>
                 <motion.div
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={slideInFromLeft(0.3)}
-                    className="flex flex-col md:w-[48%]"
+                    className="flex flex-col w-[90%] md:w-[48%]"
                 >
                     {appInfos.map((info) => {
                         return (
@@ -45,7 +49,9 @@ const AppInfo: React.FC = () => {
                                         {info.title}
                                     </h2>
                                 </div>
-                                <h3 className="text-sm">{info.description}</h3>
+                                <h3 className="text-sm text-gray-600">
+                                    {info.description}
+                                </h3>
                             </div>
                         );
                     })}

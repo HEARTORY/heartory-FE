@@ -18,12 +18,12 @@ const Carousel = () => {
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
-        beforeChange: (current, next) => setCurrentSlide(next),
+        beforeChange: (_current: any, next: any) => setCurrentSlide(next),
         centerMode: true,
         centerPadding: "0",
         responsive: [
             {
-                breakpoint: 850, // Medium screen size breakpoint (e.g., 768px)
+                breakpoint: 1100, // Medium screen size breakpoint (e.g., 768px)
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,

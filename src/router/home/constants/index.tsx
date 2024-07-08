@@ -42,19 +42,19 @@ export const areaInfo = [
 ];
 export const appInfos = [
     {
-        title: "CREATIVE DESIGN",
+        title: "INTEGRITY",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra nunc ante velit vitae. Est tellus vitae, nullam lobortis enim. Faucibus amet etiam tincidunt rhoncus, ullamcorper velit.",
+            "At HEARTORY, integrity forms the foundation of our mission and operations. We are committed to maintaining the highest standards of honesty, transparency, and ethical practices.",
     },
     {
-        title: "EASY TO USE",
+        title: "INCLUSIVITY",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra nunc ante velit vitae. Est tellus vitae, nullam lobortis enim. Faucibus amet etiam tincidunt rhoncus, ullamcorper velit.",
+            "HEARTORY is dedicated to promoting inclusivity in all aspects of our programs and services. Our programs are designed to be culturally sensitive and adaptable, addressing the diverse needs of individuals from different walks of life.",
     },
     {
-        title: "BEST USER EXPERIENCE",
+        title: "SYNERGY",
         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra nunc ante velit vitae. Est tellus vitae, nullam lobortis enim. Faucibus amet etiam tincidunt rhoncus, ullamcorper velit.",
+            "Synergy is at the heart of HEARTORY's approach to mental health. We recognize that the best outcomes are achieved when individuals, communities, and organizations work together towards a common goal.",
     },
 ];
 export const features = [

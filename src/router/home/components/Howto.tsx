@@ -11,11 +11,10 @@ export const Howto: React.FC = () => {
             <h1 className="text-white font-bold uppercase mt-4 text-2xl ">
                 How to use our app perfectly
             </h1>
-            <h3 className=" w-[50%] mt-8 text-center text-gray-300 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra
-                nunc ante velit vitae. Est tellus vitae, nullam lobortis enim.
-                Faucibus amet etiam tincidunt rhoncus, ullamcorper velit.
-                Ullamcorper risus tempor, ac nunc libero urna, feugiat.
+            <h3 className=" w-[75%] lg:w-[30%] mt-8 text-center text-gray-200 text-sm">
+                Unlock the full potential of our app with this comprehensive
+                guide, designed to help you navigate its features effortlessly
+                and maximize your mental well-being journey.
             </h3>
             <div className="flex justify-center items-center w-[80%]  bg-gray-100  mt-16 mb-16 md:w-[500px] md:h-[200px] ">
                 <div className="w-full ">

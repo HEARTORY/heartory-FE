@@ -4,17 +4,14 @@ import { features } from "../constants";
 export const Features: React.FC = () => {
     return (
         <div
-            className="w-full min-h-[140vh] flex flex-col items-center pb-10 pt-10 bg-cover"
+            className="w-full min-h-[1300px] flex flex-col items-center pb-10 pt-10 bg-cover"
             style={{ backgroundImage: `url(${Background})` }}
         >
             <h1 className="text-white text-3xl text-center mb-10 pt-5">
                 App Features
             </h1>
-            <h3 className="text-center text-white w-[45%]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra
-                nunc ante velit vitae. Est tellus vitae, nullam lobortis enim.
-                Faucibus amet etiam tincidunt rhoncus, ullamcorper velit.
-                Ullamcorper risus tempor, ac nunc libero urna, feugiat.
+            <h3 className="text-center text-gray-200 w-[45%]">
+                All you need is a camera, flashlight, and your finger
             </h3>
             <div className="mt-20 md:mt-60 relative flex flex-col items-center">
                 {features.slice(0, 3).map((item) => {

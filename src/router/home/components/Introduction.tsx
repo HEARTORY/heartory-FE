@@ -19,11 +19,11 @@ const Introduction: React.FC = () => {
             >
                 <div className=" sm:absolute sm:h-[400px] sm:w-[450px] bg-white left-[-30px] top-6 flex flex-col p-8">
                     <h1 className="font-bold text-5xl uppercase text-[#38419d]">
-                        A solution for your heart needs
+                        WELCOME TO HEARTORY
                     </h1>
                     <h2 className="mt-4 font-bold text-[#66D0A4] text-xl">
-                        Every Heartbeat is a story.We are helping you understand
-                        your heart.
+                        Taking good care of your mental health has never been
+                        more important.
                     </h2>
                     <h1 className="mt-4 font-bold text-[#38419d] text-3xl">
                         DOWLOAD APP NOW
