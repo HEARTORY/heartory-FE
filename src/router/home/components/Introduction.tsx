@@ -102,7 +102,7 @@ const Introduction: React.FC = () => {
                                     <Button
                                         type="submit"
                                         size="sm"
-                                        className="px-3 bg-[#66D0A4] text-black hover:bg-[#255d46]"
+                                        className="px-2 bg-[#66D0A4] text-black hover:bg-[#255d46]"
                                         onClick={handleCopy}
                                     >
                                         <span className="sr-only text-black">
