@@ -13,6 +13,7 @@ import PaymentCancel from "./paymentCancel";
 import PaymentSuccess from "./paymentSuccess";
 import Dashboard from "./dashboard";
 import AdminRoute from "./AdminRoute";
+import Dowload from "./dowload";
 
 const RouterComponent: React.FC = () => {
     const hiddenRoute = [
@@ -89,7 +90,14 @@ const RouterComponent: React.FC = () => {
             component: <NotFound />,
             exact: true,
             restrict: true,
-        }
+        },
+        {
+            index: true,
+            path: "dowload",
+            component: <Dowload />,
+            exact: true,
+            restrict: true,
+        },
     ];
     return (
         <BrowserRouter>

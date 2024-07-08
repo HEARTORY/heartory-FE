@@ -11,7 +11,7 @@ export const Howto: React.FC = () => {
             <h1 className="text-white font-bold uppercase mt-4 text-2xl ">
                 How to use our app perfectly
             </h1>
-            <h3 className=" w-[75%] lg:w-[30%] mt-8 text-center text-gray-200 text-sm">
+            <h3 className=" w-[75%] lg:w-[30%] mt-8 text-center text-white text-sm">
                 Unlock the full potential of our app with this comprehensive
                 guide, designed to help you navigate its features effortlessly
                 and maximize your mental well-being journey.
