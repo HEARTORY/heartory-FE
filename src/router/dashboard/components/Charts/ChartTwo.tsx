@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 interface Props {
   monthlySubscriptionByDay: any,
+  dailySubscriptionByDay: any
 }
 interface ChartTwoState {
   series: {
@@ -81,7 +82,9 @@ const ChartTwo: React.FC<Props> = (props) => {
       },
       {
         name: 'Year Subscriptions',
-        data: [1, 0],
+        data: props.dailySubscriptionByDay.map((item: any) => {
+          return item[1];
+        }),
       },
       // {
       //   name: 'Revenue',

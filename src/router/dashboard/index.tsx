@@ -32,6 +32,7 @@ const Dashboard: React.FC<Props> = () => {
     const [premiumUserCount, setPremiumUserCount] = useState(0);
     const [revenueByDay, setRevenueByDay] = useState(null);
     const [monthlySubscriptionByDay, setMonthlySubscriptionByDay] = useState(null);
+    const [dailySubscriptionByDay, setDailySubscriptionByDay] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,6 +55,7 @@ const Dashboard: React.FC<Props> = () => {
                 setTotalMonthSubscriptions(res.data.data.totalMonthSubscriptions);
                 setRevenueByDay(res.data.data.revenueByDay);
                 setMonthlySubscriptionByDay(res.data.data.monthlySubscriptionByDay);
+                setDailySubscriptionByDay(res.data.data.dailySubscriptionByDay);
                 setLoading(false);
             }
         };
@@ -182,7 +184,7 @@ const Dashboard: React.FC<Props> = () => {
 
                     <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
                         <ChartOne revenueByDay={revenueByDay} />
-                        <ChartTwo monthlySubscriptionByDay={monthlySubscriptionByDay} />
+                        <ChartTwo monthlySubscriptionByDay={monthlySubscriptionByDay} dailySubscriptionByDay={dailySubscriptionByDay} />
                         <ChartThree freeUserCount={freeUserCount} premiumUserCount={premiumUserCount} />
                         <ChartFour totalYearSubscriptions={totalYearSubscriptions} totalMonthSubscriptions={totalMonthSubscriptions} />
                         {/* <div className="col-span-12 xl:col-span-8">
