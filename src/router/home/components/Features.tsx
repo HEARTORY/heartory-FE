@@ -10,7 +10,7 @@ export const Features: React.FC = () => {
             <h1 className="text-white text-3xl text-center mb-10 pt-5">
                 App Features
             </h1>
-            <h3 className="text-center text-gray-200 w-[45%]">
+            <h3 className="text-center text-white w-[45%]">
                 All you need is a camera, flashlight, and your finger
             </h3>
             <div className="mt-20 md:mt-60 relative flex flex-col items-center">
