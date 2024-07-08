@@ -27,11 +27,23 @@ export const InterfaceLook: React.FC = () => {
         });
     };
     const handleCopy = () => {
-        toast({
-            variant: "success",
-            title: "Copy dowload link sucessfully",
-            description: "Let's go straight to dowload!! ",
-        });
+        const downloadLink = "https://heartory.vercel.app/dowload";
+        navigator.clipboard.writeText(downloadLink).then(
+            () => {
+                toast({
+                    variant: "success",
+                    title: "Copy download link successfully",
+                    description: "Let's go straight to download!! ",
+                });
+            },
+            () => {
+                toast({
+                    variant: "destructive",
+                    title: "Failed to copy",
+                    description: "Unable to copy the download link.",
+                });
+            }
+        );
     };
     return (
         <div className="flex flex-col items-center">
