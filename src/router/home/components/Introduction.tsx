@@ -70,17 +70,17 @@ const Introduction: React.FC = () => {
                     <h1 className="mt-4 font-bold text-[#38419d] text-3xl">
                         DOWLOAD APP NOW
                     </h1>
-                    <div className="flex flex-col min-[400px]:justify-start min-[400px]:pr-8 cursor-pointer mt-2 min-[400px]:flex-row items-center justify-center">
+                    <div className="flex flex-col min-[450px]:justify-start min-[450px]:pr-8 cursor-pointer mt-2 min-[450px]:flex-row items-center justify-center">
                         <img
                             src={google}
-                            className="min-[400px]:mr-4"
+                            className="min-[450px]:mr-4  mb-6 min-[450px]:mb-0"
                             onClick={handleRedirectGooglePlay}
                         />
 
                         <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="ghost">
-                                    <img src={apk} className="w-[150px]" />
+                            <DialogTrigger asChild className="w-[150px] p-0">
+                                <Button variant="ghost" className="">
+                                    <img src={apk} className="" />
                                 </Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-md md:max-w-lg lg:max-w-[1100px]  ">
